@@ -16,8 +16,7 @@
     Documentation
     -------------
 
-    The documentation available as of the date of this release
-    is included in HTML format.
+    The documentation you can see in functions.h .
     
     Installation
     ------------
