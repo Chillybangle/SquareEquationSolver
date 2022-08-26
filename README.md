@@ -17,13 +17,15 @@
     -------------
 
     The documentation available as of the date of this release
-    is included in HTML format in the docs/manual/ directory.
+    is included in HTML format.
     
     Installation
     ------------
     
-    Just install program folder, go to the directory and print
-    make on the command line.
+    Install program folder, go to the directory. Open 
+    the command line print 'make' on the command line
+    (you need to have gcc compiler installed). Then
+    print './square_eq_solver' and use it :)
     
     Contacts
     --------
