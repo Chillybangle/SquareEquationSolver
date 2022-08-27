@@ -14,7 +14,7 @@ int main ()
     Roots nroots = Roots_DEFAULT;
     
 #if DEBUG == 0
-    int input_option = Options_default; //! Shows input option
+    int input_option = Options_default; //< Shows input option
     while (input_option = input (&a, &b, &c))
     {
         switch (input_option)

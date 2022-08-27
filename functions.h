@@ -16,7 +16,7 @@ enum Roots
     Roots_INFSOLUTIONS = 993  ///< Shows that equation has infinite number of solutions
 };
 
-//! Constants to interact with user
+/// Constants to interact with user
 enum Options 
 {
     Options_quit,   //< End the program
@@ -24,6 +24,8 @@ enum Options
     Options_meow,   //< Print the cat picture
     Options_default //< Solve the equation
 };
+
+const double error = 0.001; //< Double calculation error 
 
 /*! \defgroup solve_equation Solve Equation
  *  \brief This module contains functions which are necessary to solve the equation
@@ -48,7 +50,7 @@ enum Options
  * \param[out] x2 The pointer to the second root of equation
  * \return Number of roots of the equation
  */
-enum Roots solve_square (double a, double b, double c, double *x1, double *x2);
+enum Roots solve_square (const double a, const double b, const double c, double *x1, double *x2);
 
 /*!
  *\brief Solve a linear equation of the form bx + c = 0
@@ -65,7 +67,7 @@ enum Roots solve_square (double a, double b, double c, double *x1, double *x2);
  * \param[out] x The pointer to the root of equation
  * \return Number of roots (one or special cases)
  */
-enum Roots solve_linear (double b, double c, double *x);
+enum Roots solve_linear (const double b, const double c, double *x);
 
 /*! 
  * \defgroup user_interaction Interaction with user 
@@ -99,10 +101,10 @@ int input (double *a, double *b, double *c);
  */
 void output (enum Roots nroots, double x1, double x2);
 
-//! Paint a cat
+/// Paint a cat
 void purr_paint (void);
 
-//! Show the user manual
+/// Show the user manual
 void help_desk (void); 
 /*! @} */
 

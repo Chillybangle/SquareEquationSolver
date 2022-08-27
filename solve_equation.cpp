@@ -10,9 +10,9 @@
  * \param[in] x Double type value
  * \return 1 if value is zero and 0 otherwise
  */
-static int is_zero(double x);
+static int is_zero(const double x);
 
-enum Roots solve_square (double a, double b, double c, double *x1, double *x2) 
+enum Roots solve_square (const double a, const double b, const double c, double *x1, double *x2) 
 {    
     if (is_zero (a)) {
         return solve_linear (b, c, x1);
@@ -25,7 +25,7 @@ enum Roots solve_square (double a, double b, double c, double *x1, double *x2)
         return Roots_NOSOLUTION;
         
     } else if (is_zero (discrim)) {
-        *x1 = *x2 = (-b / (2 * a));
+        *x1 = (-b / (2 * a));
         return Roots_ONE;
         
     } else {
@@ -36,22 +36,24 @@ enum Roots solve_square (double a, double b, double c, double *x1, double *x2)
     }
 }
 
-enum Roots solve_linear (double b, double c, double *x) 
+enum Roots solve_linear (const double b, const double c, double *x) 
 {
-    if (is_zero (b) && !is_zero (c)) {
-        return Roots_NOSOLUTION;
+    if (is_zero (b)) 
+    {
+        if (is_zero (c)) {
+            return Roots_INFSOLUTIONS;
         
-    } else if (is_zero (b)) {
-        return Roots_INFSOLUTIONS;
+        } else {
+            return Roots_NOSOLUTION;
         
-    } else {
-        *x = -c / b;
-        return Roots_ONE;
+        }
     }
+    *x = -c / b;
+    
+    return Roots_ONE;
 }
 
-static int is_zero (double x) 
+static int is_zero (const double x) 
 {
-    const double error = 0.001;
     return (fabs (x) < error);
 }

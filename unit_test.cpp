@@ -1,5 +1,24 @@
 #include "functions.h"
 #include <stdio.h>
+#include <math.h>
+
+/// Constants to display correlation between double
+enum Signs
+{
+    Signs_EQUAL, //< Two doubles are equal
+    Signs_MORE,  //< The first is more 
+    Signs_LESS   //< The first is less
+};
+
+/*!
+ * \brief Function to compare double
+ * 
+ * \param[in] x1 The first double
+ * \param[in] x2 The second double
+ * 
+ * \return constant from enum Signs which shows the relations
+ */
+static enum Signs compare (const double x1, const double x2);
 
 void unit_test (void) 
 {
@@ -22,7 +41,8 @@ void unit_test (void)
         if (nroots != mass[i][5]) {
             printf ("Неверное количество корней на %d тесте\n", i);
         } else {
-            if ((x1 == mass[i][4] && x2 == mass[i][3]) || (x1 == mass[i][3] && x2 == mass[i][4])) {
+            if ((compare (x1, mass[i][4]) == Signs_EQUAL && compare (x2, mass[i][3]) == Signs_EQUAL)
+            || (compare (x1, mass[i][3]) == Signs_EQUAL && compare (x2, mass[i][4]) == Signs_EQUAL)) {
                 printf ("%d - Пройден\n", i);
             } else {
                 printf ("Ошибка в решении %d теста.\n\tРезультаты расчета: x1 = %lf x2 = %lf\n"
@@ -32,4 +52,16 @@ void unit_test (void)
         }
         x1 = x2 = 0;
     }
-} 
+}
+
+static enum Signs compare (const double x1, const double x2)
+{
+    double difference = x1 - x2;
+    if (fabs (difference) < error)
+        return Signs_EQUAL;
+    
+    else if (difference > 0)
+        return Signs_MORE;
+    
+    return Signs_LESS;
+}

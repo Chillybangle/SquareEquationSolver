@@ -4,28 +4,28 @@
 //! Clear the input from wrong chars
 static void inp_clearing (void);
 
-void output (enum Roots nroots, double x1, double x2) 
+void output (enum Roots nroots, const double x1, const double x2) 
 {
     switch (nroots) 
     {
         case Roots_NOSOLUTION:
-            printf ("\nНет решения\n");
+            printf ("\nNo solution\n");
             break;
             
         case Roots_INFSOLUTIONS:
-            printf ("\nБесконечно решений\n");
+            printf ("\nInfinite solutions\n");
             break;
             
         case Roots_TWO:
-            printf ("\nx1 = %lf x2 = %lf \n", x1, x2);
+            printf ("\nx1 = %lg x2 = %lg \n", x1, x2);
             break;
             
         case Roots_ONE:
-            printf ("\nx = %lf \n", x1);
+            printf ("\nx = %lg \n", x1);
             break;
             
         default:
-            printf ("\nUnknown fail. Передано неверное количество корней\n");
+            printf ("\nUnknown fail. Incorrect number of roots passed\n");
             break;
     }
 }
@@ -33,12 +33,12 @@ void output (enum Roots nroots, double x1, double x2)
 int input (double *a, double *b, double *c) 
 {
     printf ("---------------------\n");
-    printf ("Решает уравнение вида:\n");
+    printf ("Solves an equation of the form:\n");
     printf ("\t\t\tax^2 + bx + c = 0\n");
-    printf ("\nВведите параметры a, b, c через пробел:\n");
+    printf ("\nInput parameters a, b, c separated by spaces:\n");
 
     char symb = 'n';//nothing
-    while (scanf ("%lf %lf %lf", a, b, c) != 3) 
+    while (scanf ("%lg %lg %lg", a, b, c) != 3) 
     {
         switch (symb = getchar ())
         {
@@ -55,8 +55,8 @@ int input (double *a, double *b, double *c)
                 break;
                 
             default:
-                printf ("Неверный ввод! Введите три числа через пробел"
-                        "или h для получения справки\n");
+                printf ("Wrong input! Input 3 parameters separated by spaces"
+                        "or h to get help\n");
                 break;
         }
         inp_clearing ();
