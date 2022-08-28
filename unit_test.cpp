@@ -18,7 +18,7 @@ enum Signs
  * 
  * \return constant from enum Signs which shows the relations
  */
-static enum Signs compare (const double x1, const double x2);
+static enum Signs double_comp (const double x1, const double x2);
 
 void unit_test (void) 
 {
@@ -38,12 +38,12 @@ void unit_test (void)
     for (int i = 0; i < ntests; i++) 
     {
         int nroots = solve_square (mass[i][0], mass[i][1], mass[i][2], &x1, &x2);
-        if (nroots != mass[i][5]) {
+        if (double_comp (nroots, mass[i][5]) != Signs_EQUAL) {
             printf ("Неверное количество корней на %d тесте\n", i);
         } else {
-            if ((compare (x1, mass[i][4]) == Signs_EQUAL && compare (x2, mass[i][3]) == Signs_EQUAL)
-            || (compare (x1, mass[i][3]) == Signs_EQUAL && compare (x2, mass[i][4]) == Signs_EQUAL)) {
-                printf ("%d - Пройден\n", i);
+            if ((double_comp (x1, mass[i][4]) == Signs_EQUAL && double_comp (x2, mass[i][3]) == Signs_EQUAL)
+            || (double_comp (x1, mass[i][3]) == Signs_EQUAL && double_comp (x2, mass[i][4]) == Signs_EQUAL)) {
+                printf ("%d - Done\n", i);
             } else {
                 printf ("Ошибка в решении %d теста.\n\tРезультаты расчета: x1 = %lf x2 = %lf\n"
                         "\tОжидалось: x1 = %lf x2 = %lf\n", 
@@ -54,7 +54,7 @@ void unit_test (void)
     }
 }
 
-static enum Signs compare (const double x1, const double x2)
+static enum Signs double_comp (const double x1, const double x2)
 {
     double difference = x1 - x2;
     if (fabs (difference) < error)

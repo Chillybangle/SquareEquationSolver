@@ -15,7 +15,7 @@ int main ()
     
 #if DEBUG == 0
     int input_option = Options_default; //< Shows input option
-    while (input_option = input (&a, &b, &c))
+    while ((input_option = input (&a, &b, &c)))
     {
         switch (input_option)
         {
@@ -30,6 +30,10 @@ int main ()
                 
             case Options_help:
                 help_desk ();
+                break;
+                
+            default:
+                printf ("Unknown fail. Shit happens. Try again\n");
                 break;
         }
     }

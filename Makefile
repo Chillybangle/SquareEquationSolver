@@ -6,7 +6,7 @@ square_eq_solver: main.o solve_equation.o unit_test.o user_interaction.o
 	gcc main.o solve_equation.o unit_test.o user_interaction.o -o square_eq_solver -lm $(CXXFLAGS)
 
 %.o: %.cpp
-	gcc -c $^ -o $@
+	gcc -c $^ -o $@ $(CXXFLAGS)
 
 clean:
 	rm -rf *.o square_eq_solver

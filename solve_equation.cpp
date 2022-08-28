@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <cassert>
 #include "functions.h"
 
 /*!
@@ -13,7 +14,10 @@
 static int is_zero(const double x);
 
 enum Roots solve_square (const double a, const double b, const double c, double *x1, double *x2) 
-{    
+{   
+    assert (x1);
+    assert (x2);
+    
     if (is_zero (a)) {
         return solve_linear (b, c, x1);
     }
@@ -21,12 +25,13 @@ enum Roots solve_square (const double a, const double b, const double c, double 
     double discrim = b * b - 4 * a * c;
     
     //printf ("discrim = %lf\n", discrim);
-    if (discrim < 0) {
-        return Roots_NOSOLUTION;
         
-    } else if (is_zero (discrim)) {
+    if (is_zero (discrim)) {
         *x1 = (-b / (2 * a));
         return Roots_ONE;
+        
+    } else if (discrim < 0) {
+        return Roots_NOSOLUTION;
         
     } else {
         double disc_sq = sqrt (discrim);
@@ -38,6 +43,8 @@ enum Roots solve_square (const double a, const double b, const double c, double 
 
 enum Roots solve_linear (const double b, const double c, double *x) 
 {
+    assert (x);
+    
     if (is_zero (b)) 
     {
         if (is_zero (c)) {

@@ -1,7 +1,8 @@
 #include "functions.h"
 #include <stdio.h>
+#include <cassert>
 
-//! Clear the input from wrong chars
+/// Clear the input from wrong chars
 static void inp_clearing (void);
 
 void output (enum Roots nroots, const double x1, const double x2) 
@@ -23,7 +24,8 @@ void output (enum Roots nroots, const double x1, const double x2)
         case Roots_ONE:
             printf ("\nx = %lg \n", x1);
             break;
-            
+          
+        case Roots_DEFAULT:
         default:
             printf ("\nUnknown fail. Incorrect number of roots passed\n");
             break;
@@ -32,12 +34,16 @@ void output (enum Roots nroots, const double x1, const double x2)
 
 int input (double *a, double *b, double *c) 
 {
+    assert (a);
+    assert (b);
+    assert (c);
+    
     printf ("---------------------\n");
     printf ("Solves an equation of the form:\n");
     printf ("\t\t\tax^2 + bx + c = 0\n");
     printf ("\nInput parameters a, b, c separated by spaces:\n");
 
-    char symb = 'n';//nothing
+    int symb = 0;
     while (scanf ("%lg %lg %lg", a, b, c) != 3) 
     {
         switch (symb = getchar ())
